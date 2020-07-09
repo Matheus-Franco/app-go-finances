@@ -1,12 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, StatusBar } from 'react-native';
+
+import Header from './src/components/Header';
+import Content from './src/components/Content';
 
 const App: React.FC = () => {
-    return (
-        <View>
-            <Text>GoFinances - mobile</Text>
-        </View>
-    );
+  return (
+    <>
+      <StatusBar barStyle="light-content" />
+      <View style={{ flex: 1 }}>
+        <Header />
+        <Content />
+      </View>
+    </>
+  );
 };
 
 export default App;
