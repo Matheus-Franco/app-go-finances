@@ -1,88 +1,73 @@
-import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Ionicons, Feather } from '@expo/vector-icons';
 
 import {
-  Container,
+  TransactionComponent,
   TransactionTitle,
   TransactionValue,
   ButtonIcon,
+  DetailTransaction,
+  TransactionList,
+  Container,
+  TransactionDate,
+  TransactionCategory,
 } from './styles';
 
 const Transaction: React.FC = () => {
+  const [isDetailed, setIsDetailed] = useState(false);
+
+  function toggleDetailed(): void {
+    if (!isDetailed) {
+      setIsDetailed(true);
+    } else {
+      setIsDetailed(false);
+    }
+  }
+
   return (
-    <>
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
+    <TransactionList>
+      <TransactionComponent>
+        <Container>
+          {isDetailed ? (
+            <View>
+              <ButtonIcon onPress={toggleDetailed}>
+                <Ionicons
+                  name="ios-arrow-up"
+                  size={24}
+                  style={{ color: '#363F5F' }}
+                />
+              </ButtonIcon>
+            </View>
+          ) : (
+              <View>
+                <ButtonIcon onPress={toggleDetailed}>
+                  <Ionicons
+                    name="ios-arrow-down"
+                    size={24}
+                    style={{ color: '#363F5F' }}
+                  />
+                </ButtonIcon>
+              </View>
+            )}
 
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
+          <TransactionTitle>Investimento</TransactionTitle>
+          <TransactionValue>R$ 500.00</TransactionValue>
+        </Container>
 
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
-
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
-
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
-
-      <Container>
-        <ButtonIcon>
-          <Ionicons
-            name="ios-arrow-down"
-            size={24}
-            style={{ color: '#363F5F', marginLeft: 5 }}
-          />
-        </ButtonIcon>
-        <TransactionTitle>Investimento</TransactionTitle>
-        <TransactionValue>R$ 500.00</TransactionValue>
-      </Container>
-    </>
+        {isDetailed && (
+          <DetailTransaction>
+            <Feather
+              name="calendar"
+              style={{ color: '#363F5F', marginLeft: 24 }}
+              size={24}
+            />
+            <TransactionDate>05/12/2001</TransactionDate>
+            <TransactionCategory>Comida</TransactionCategory>
+          </DetailTransaction>
+        )}
+      </TransactionComponent>
+    </TransactionList>
   );
 };
 

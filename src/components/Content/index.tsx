@@ -10,7 +10,9 @@ const Content: React.FC = () => {
   return (
     <Container>
       <ValueCard />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Transaction />
+        <Transaction />
         <Transaction />
       </ScrollView>
     </Container>
