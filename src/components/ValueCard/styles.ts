@@ -1,42 +1,33 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.TouchableOpacity`
-  background: #ff872c;
+interface ICardActive {
+  active: boolean;
+}
 
-  width: 80%;
-  height: 124px;
-
-  border-radius: 16px;
-
-  margin-top: 60px;
-  margin-left: 10%;
-  margin-bottom: 48px;
-
-  padding: 24px;
-
-  box-shadow: 3px 3px 3px gray;
-`;
-
-export const CardView = styled.View`
-  flex-direction: row;
-`;
-
-export const SpaceBetweenDiv = styled.View`
-  justify-content: space-between;
-  flex-direction: row;
-
-  margin-bottom: 24px;
-
+export const Container = styled.TouchableOpacity<ICardActive>`
+  background: ${(props): string => (props.active ? '#fe883b' : '#fff')};
   width: 100%;
+  height: 138px;
+  transform: translateY(-62px);
+  border-radius: 10px;
+  padding: 24px 24px 14px 24px;
+  justify-content: space-between;
 `;
 
-export const ValueCardTitle = styled.Text`
-  color: #fff;
-  font-size: 18px;
+export const DescriptionIcon = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-export const ValueCardTotal = styled.Text`
-  color: #fff;
+export const Description = styled.Text<ICardActive>`
+  color: ${(props): string => (props.active ? '#fff' : '#363F5F')};
+  font-size: 14px;
+  font-family: 'Poppins';
+`;
 
+export const Price = styled.Text<ICardActive>`
+  color: ${(props): string => (props.active ? '#fff' : '#363F5F')};
   font-size: 36px;
+  font-family: 'Poppins';
 `;
