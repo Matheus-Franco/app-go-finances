@@ -1,19 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.SafeAreaView`
   background: #5537ce;
-  height: 200px;
-
-  z-index: 100;
-`;
-
-export const Title = styled.Text`
-  font-size: 36px;
-
-  color: #fff;
-
-  margin-left: 22px;
-  margin-top: 32px;
 
   align-items: center;
+  height: 180px;
+`;
+
+export const Logo = styled.Image`
+  margin-top: 20px;
 `;
