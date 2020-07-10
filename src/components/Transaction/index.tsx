@@ -29,8 +29,8 @@ const Transaction: React.FC = () => {
     <TransactionList>
       <TransactionComponent>
         <Container>
-          {isDetailed ? (
-            <View>
+          <View style={{ flexDirection: 'row' }}>
+            {isDetailed ? (
               <ButtonIcon onPress={toggleDetailed}>
                 <Ionicons
                   name="ios-arrow-up"
@@ -38,9 +38,7 @@ const Transaction: React.FC = () => {
                   style={{ color: '#363F5F' }}
                 />
               </ButtonIcon>
-            </View>
-          ) : (
-              <View>
+            ) : (
                 <ButtonIcon onPress={toggleDetailed}>
                   <Ionicons
                     name="ios-arrow-down"
@@ -48,21 +46,23 @@ const Transaction: React.FC = () => {
                     style={{ color: '#363F5F' }}
                   />
                 </ButtonIcon>
-              </View>
-            )}
+              )}
 
-          <TransactionTitle>Investimento</TransactionTitle>
+            <TransactionTitle>Investimento</TransactionTitle>
+          </View>
           <TransactionValue>R$ 500.00</TransactionValue>
         </Container>
 
         {isDetailed && (
           <DetailTransaction>
-            <Feather
-              name="calendar"
-              style={{ color: '#363F5F', marginLeft: 24 }}
-              size={24}
-            />
-            <TransactionDate>05/12/2001</TransactionDate>
+            <View style={{ flexDirection: 'row' }}>
+              <Feather
+                name="calendar"
+                style={{ color: '#363F5F', marginLeft: 24 }}
+                size={24}
+              />
+              <TransactionDate>05/12/2001</TransactionDate>
+            </View>
             <TransactionCategory>Comida</TransactionCategory>
           </DetailTransaction>
         )}

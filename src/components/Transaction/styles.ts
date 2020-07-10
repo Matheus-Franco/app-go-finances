@@ -5,13 +5,12 @@ export const TransactionList = styled.View``;
 export const TransactionComponent = styled.View``;
 
 export const Container = styled.View`
-  height: 70px;
+  height: 60px;
   width: 374px;
   border-radius: 10px;
-
+  margin-top: 6px;
   background: #fff;
   padding: 6px 24px;
-  margin-top: 5px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -22,6 +21,8 @@ export const Container = styled.View`
 export const ButtonIcon = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
+
+  margin-right: 12px;
 `;
 
 export const TransactionTitle = styled.Text`
@@ -37,7 +38,6 @@ export const TransactionValue = styled.Text`
 `;
 
 export const DetailTransaction = styled.View`
-  margin-bottom: 5px;
   justify-content: space-between;
   align-items: center;
   border-style: solid;
@@ -58,6 +58,8 @@ export const TransactionDate = styled.Text`
   color: #363f5f;
   font-size: 16px;
   font-family: 'Poppins';
+
+  margin-left: 12px;
 `;
 
 export const TransactionCategory = styled.Text`
