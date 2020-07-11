@@ -6,12 +6,12 @@ interface ICardActive {
 
 export const Container = styled.TouchableOpacity<ICardActive>`
   background: ${(props): string => (props.active ? '#fe883b' : '#fff')};
-  width: 100%;
   height: 138px;
   transform: translateY(-62px);
   border-radius: 10px;
   padding: 24px 24px 14px 24px;
   justify-content: space-between;
+  margin: 0 20px;
 `;
 
 export const DescriptionIcon = styled.View`
