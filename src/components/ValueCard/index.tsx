@@ -3,6 +3,7 @@ import { Feather } from '@expo/vector-icons';
 
 import api from '../../services/api';
 import formatValue from '../../utils/formatValue';
+import Loading from '../Loading';
 
 import { Container, DescriptionIcon, Description, Price } from './styles';
 
@@ -22,8 +23,8 @@ const cardTypes = ['Total', 'Entradas', 'Saídas'];
 const ValueCard: React.FC = () => {
   const [cardType, setCardType] = useState<number>(0);
   const [balanceType, setBalanceType] = useState<number>(0);
-
   const [balance, setBalance] = useState<Balance>({} as Balance);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const balanceTypes = [balance.total, balance.income, balance.outcome];
 
@@ -37,6 +38,7 @@ const ValueCard: React.FC = () => {
         total: formatValue(response.data.balance.total),
       };
 
+      setLoading(false);
       setBalance(balanceFormatted);
     }
 
@@ -65,7 +67,11 @@ const ValueCard: React.FC = () => {
         <Description active={cardType === 0}>{cardTypes[cardType]}</Description>
         <Feather name={icon.name} color={icon.color} size={24} />
       </DescriptionIcon>
-      <Price active={cardType === 0}>{balanceTypes[balanceType]}</Price>
+      {loading ? (
+        <Loading />
+      ) : (
+          <Price active={cardType === 0}>{balanceTypes[balanceType]}</Price>
+        )}
     </Container>
   );
 };

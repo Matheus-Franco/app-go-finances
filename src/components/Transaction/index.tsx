@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View } from 'react-native';
 import { Ionicons, Feather } from '@expo/vector-icons';
 
+import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
+
 import {
   TransactionComponent,
   TransactionTitle,
