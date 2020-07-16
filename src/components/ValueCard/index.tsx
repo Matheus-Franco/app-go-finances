@@ -1,5 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
+
+import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
 
 import { Container, DescriptionIcon, Description, Price } from './styles';
 
@@ -8,16 +11,45 @@ interface IIcon {
   color: string;
 }
 
+interface Balance {
+  income: string;
+  outcome: string;
+  total: string;
+}
+
 const cardTypes = ['Total', 'Entradas', 'Saídas'];
 
 const ValueCard: React.FC = () => {
   const [cardType, setCardType] = useState<number>(0);
+  const [balanceType, setBalanceType] = useState<number>(0);
+
+  const [balance, setBalance] = useState<Balance>({} as Balance);
+
+  const balanceTypes = [balance.total, balance.income, balance.outcome];
+
+  useEffect(() => {
+    async function loadBalance(): Promise<void> {
+      const response = await api.get('/transactions');
+
+      const balanceFormatted = {
+        income: formatValue(response.data.balance.income),
+        outcome: formatValue(response.data.balance.outcome),
+        total: formatValue(response.data.balance.total),
+      };
+
+      setBalance(balanceFormatted);
+    }
+
+    loadBalance();
+  }, []);
 
   function handleClick(): void {
     if (cardType === 2) {
       setCardType(0);
+      setBalanceType(0);
     } else {
       setCardType(cardType + 1);
+      setBalanceType(balanceType + 1);
     }
   }
 
@@ -33,7 +65,7 @@ const ValueCard: React.FC = () => {
         <Description active={cardType === 0}>{cardTypes[cardType]}</Description>
         <Feather name={icon.name} color={icon.color} size={24} />
       </DescriptionIcon>
-      <Price active={cardType === 0}>R$24.000,00</Price>
+      <Price active={cardType === 0}>{balanceTypes[balanceType]}</Price>
     </Container>
   );
 };
