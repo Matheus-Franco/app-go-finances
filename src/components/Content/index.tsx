@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import ValueCard from '../ValueCard';
 
+import ValueCard from '../ValueCard';
 import Transaction from '../Transaction';
 import Footer from '../Footer';
 
@@ -20,8 +20,6 @@ const Content: React.FC = () => {
           },
         ]}
       >
-        <Transaction />
-        <Transaction />
         <Transaction />
       </ScrollView>
       <Footer />

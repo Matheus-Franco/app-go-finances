@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-export const TransactionList = styled.View``;
+interface IValueType {
+  color: string;
+}
 
 export const TransactionComponent = styled.View``;
 
@@ -14,6 +16,7 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 
   transform: translateY(8px);
 `;
@@ -31,10 +34,11 @@ export const TransactionTitle = styled.Text`
   font-family: 'Poppins';
 `;
 
-export const TransactionValue = styled.Text`
-  color: #12a454;
+export const TransactionValue = styled.Text<IValueType>`
   font-size: 16px;
   font-family: 'Poppins';
+
+  color: ${props => props.color};
 `;
 
 export const DetailTransaction = styled.View`
@@ -52,6 +56,7 @@ export const DetailTransaction = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const TransactionDate = styled.Text`
