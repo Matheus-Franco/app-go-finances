@@ -1,13 +1,21 @@
 import React from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import { View } from 'react-native';
 
-import { Container } from './styles';
+import LottieView from 'lottie-react-native';
+
+import loading from '../../assets/load.json';
 
 const Loading: React.FC = () => {
   return (
-    <Container>
-      <AntDesign name="loading2" size={24} color="white" />
-    </Container>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <LottieView source={loading} autoPlay autoSize />
+    </View>
   );
 };
 
