@@ -1,9 +1,11 @@
+import { Animated } from 'react-native';
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 
 interface IButton {
   color: string;
   widthSize: number;
+  disabled?: boolean;
 }
 
 interface IButtonArea {
@@ -14,8 +16,7 @@ interface ITextInput {
   fSize?: number;
 }
 
-export const Container = styled.View`
-  height: 85px;
+export const Container = styled(Animated.View)`
   background: #fff;
   z-index: 300;
   box-shadow: 0px -1px 12px rgba(0, 0, 0, 0.25);
@@ -32,12 +33,13 @@ export const ButtonArea = styled.View<IButtonArea>`
 
 export const Button = styled.TouchableOpacity<IButton>`
   background: ${props => props.color};
-  width: ${props => props.widthSize};
+  width: ${props => props.widthSize}px;
   align-items: center;
   justify-content: center;
   height: 100%;
   border-radius: 10px;
   margin-bottom: 5px;
+  opacity: ${props => (props.disabled ? 0.2 : 1)};
 `;
 
 export const ButtonText = styled.Text`
