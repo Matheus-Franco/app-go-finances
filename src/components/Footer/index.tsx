@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Animated, Dimensions } from 'react-native';
+import { Animated, Dimensions, View, KeyboardAvoidingView } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import {
   Container,
@@ -7,32 +8,36 @@ import {
   Button,
   ButtonText,
   Form,
-  FormArea,
-  Icon,
+  ValueWrapper,
+  ValueTitle,
+  ValueInput,
+  InputWrapper,
+  InputTitle,
+  InputBottom,
   Input,
-  Title,
-  InputArea,
 } from './styles';
 
 const dimensions = Dimensions.get('window');
+const translateYDown = dimensions.height / 3 - 100;
+const translateYUp = -dimensions.height / 1.83;
 
 const Footer: React.FC = () => {
-  const animation = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(translateYDown)).current;
   const [selectedAction, setSelectedAction] = useState<
     'pay' | 'receive' | 'none'
   >('none');
 
   function showFooter() {
-    Animated.timing(animation, {
-      toValue: 1,
+    Animated.timing(translateY, {
+      toValue: translateYUp,
       duration: 300,
       useNativeDriver: false,
     }).start();
   }
 
   function hideFooter() {
-    Animated.timing(animation, {
-      toValue: 0,
+    Animated.timing(translateY, {
+      toValue: translateYDown,
       duration: 300,
       useNativeDriver: false,
     }).start();
@@ -47,95 +52,89 @@ const Footer: React.FC = () => {
   }, [selectedAction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Container
+    <KeyboardAvoidingView
+      behavior="padding"
+      keyboardVerticalOffset={dimensions.height - translateYUp}
       style={{
-        height: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [85, dimensions.height],
-        }),
-        transform: [
-          {
-            translateY: animation.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0, -200],
-            }),
-          },
-        ],
+        flex: 1,
       }}
     >
-      <ButtonArea direction="row">
-        <Button
-          onPress={() => setSelectedAction('pay')}
-          widthSize={180}
-          color="#5537CE"
-          disabled={selectedAction === 'pay'}
-        >
-          <ButtonText>Paguei</ButtonText>
-        </Button>
-        <Button
-          onPress={() => setSelectedAction('receive')}
-          widthSize={180}
-          color="#FE883B"
-          disabled={selectedAction === 'receive'}
-        >
-          <ButtonText>Recebi</ButtonText>
-        </Button>
-      </ButtonArea>
+      <Container
+        style={{
+          height: dimensions.height - 120,
+          transform: [{ translateY }],
+        }}
+      >
+        <View>
+          <ButtonArea direction="row">
+            <Button
+              onPress={() => setSelectedAction('pay')}
+              color="#5537CE"
+              disabled={selectedAction === 'pay'}
+            >
+              <ButtonText>Paguei</ButtonText>
+            </Button>
+            <Button
+              onPress={() => setSelectedAction('receive')}
+              color="#FE883B"
+              disabled={selectedAction === 'receive'}
+            >
+              <ButtonText>Recebi</ButtonText>
+            </Button>
+          </ButtonArea>
 
-      <Form>
-        <FormArea>
-          <View style={{ width: '70%' }}>
-            <Title>Valor</Title>
-          </View>
-          <View style={{ width: '30%' }}>
-            <Input placeholder="R$0.00" />
-          </View>
-        </FormArea>
+          <Form>
+            <ValueWrapper>
+              <ValueTitle>Valor</ValueTitle>
 
-        <FormArea>
-          <View>
-            <Title>Título</Title>
-            <InputArea>
-              <Icon name="edit-2" color="#363f5f" size={24} />
-              <Input placeholder="Adicione o título do lançamento" />
-            </InputArea>
-          </View>
-        </FormArea>
+              <ValueInput value="R$0,00" />
+            </ValueWrapper>
 
-        <FormArea>
-          <View>
-            <Title>Categoria</Title>
-            <InputArea>
-              <Icon name="list" color="#363f5f" size={24} />
-              <Input placeholder="Outros" />
-            </InputArea>
-          </View>
-        </FormArea>
+            <InputWrapper>
+              <InputTitle>Título</InputTitle>
+              <InputBottom>
+                <MaterialCommunityIcons
+                  name="pencil"
+                  size={24}
+                  color="#363F5F"
+                />
+                <Input placeholder="Adicione o título do lançamento" />
+              </InputBottom>
+            </InputWrapper>
 
-        <FormArea>
-          <View>
-            <Title>Data</Title>
-            <InputArea>
-              <Icon name="calendar" color="#363f5f" size={24} />
-              <Input placeholder="Hoje" />
-            </InputArea>
-          </View>
-        </FormArea>
-      </Form>
+            <InputWrapper>
+              <InputTitle>Categoria</InputTitle>
+              <InputBottom>
+                <MaterialCommunityIcons name="menu" size={24} color="#363F5F" />
+                <Input placeholder="Selecione uma categoria" />
+              </InputBottom>
+            </InputWrapper>
 
-      <ButtonArea direction="column">
-        <Button widthSize={370} color="#12A454">
-          <ButtonText>Adicionar</ButtonText>
-        </Button>
-        <Button
-          onPress={() => setSelectedAction('none')}
-          widthSize={370}
-          color="#E83F5B"
-        >
-          <ButtonText>Cancelar</ButtonText>
-        </Button>
-      </ButtonArea>
-    </Container>
+            <InputWrapper>
+              <InputTitle>Data</InputTitle>
+              <InputBottom>
+                <MaterialCommunityIcons
+                  name="calendar-blank-outline"
+                  size={24}
+                  color="#363F5F"
+                />
+                <Input value="Hoje" />
+              </InputBottom>
+            </InputWrapper>
+          </Form>
+        </View>
+
+        <ButtonArea direction="column">
+          <Button onPress={() => setSelectedAction('none')} color="#E83F5B">
+            <ButtonText>Cancelar</ButtonText>
+          </Button>
+
+          <Button color="#12A454">
+            <ButtonText>Adicionar</ButtonText>
+          </Button>
+        </ButtonArea>
+      </Container>
+    </KeyboardAvoidingView>
   );
 };
 
