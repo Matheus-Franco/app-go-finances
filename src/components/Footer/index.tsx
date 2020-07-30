@@ -18,8 +18,8 @@ import {
 } from './styles';
 
 const dimensions = Dimensions.get('window');
-const translateYDown = dimensions.height / 3 - 100;
-const translateYUp = -dimensions.height / 1.83;
+const translateYDown = dimensions.height / 2.2;
+const translateYUp = -dimensions.height / 3.69;
 
 const Footer: React.FC = () => {
   const translateY = useRef(new Animated.Value(translateYDown)).current;
