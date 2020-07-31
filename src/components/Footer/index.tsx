@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { View, Animated, Dimensions } from 'react-native';
+import { View, Animated, Dimensions, Alert } from 'react-native';
 
 import {
   Container,
@@ -8,11 +8,13 @@ import {
   ButtonText,
   Form,
   FormArea,
-  Icon,
   Input,
+  Icon,
   Title,
   InputArea,
 } from './styles';
+
+import api from '../../services/api';
 
 const dimensions = Dimensions.get('window');
 
@@ -21,6 +23,32 @@ const Footer: React.FC = () => {
   const [selectedAction, setSelectedAction] = useState<
     'pay' | 'receive' | 'none'
   >('none');
+
+  const [value, setValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [category, setCategory] = useState('');
+  const [type, setType] = useState('');
+
+  async function handleSubmit() {
+    const data = {
+      value,
+      title,
+      category,
+      type,
+    };
+
+    try {
+      await api.post('/transactions', data);
+
+      Animated.timing(animation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    } catch (err) {
+      Alert.alert('Ocorreu um erro.');
+    }
+  }
 
   function showFooter() {
     Animated.timing(animation, {
@@ -36,6 +64,16 @@ const Footer: React.FC = () => {
       duration: 300,
       useNativeDriver: false,
     }).start();
+  }
+
+  function selectTypeAndActionPay() {
+    setSelectedAction('pay');
+    setType('outcome');
+  }
+
+  function selectTypeAndActionReceive() {
+    setSelectedAction('receive');
+    setType('income');
   }
 
   useEffect(() => {
@@ -65,7 +103,7 @@ const Footer: React.FC = () => {
     >
       <ButtonArea direction="row">
         <Button
-          onPress={() => setSelectedAction('pay')}
+          onPress={() => selectTypeAndActionPay()}
           widthSize={180}
           color="#5537CE"
           disabled={selectedAction === 'pay'}
@@ -73,7 +111,7 @@ const Footer: React.FC = () => {
           <ButtonText>Paguei</ButtonText>
         </Button>
         <Button
-          onPress={() => setSelectedAction('receive')}
+          onPress={() => selectTypeAndActionReceive()}
           widthSize={180}
           color="#FE883B"
           disabled={selectedAction === 'receive'}
@@ -88,7 +126,11 @@ const Footer: React.FC = () => {
             <Title>Valor</Title>
           </View>
           <View style={{ width: '30%' }}>
-            <Input placeholder="R$0.00" />
+            <Input
+              value={value}
+              onChangeText={text => setValue(text)}
+              placeholder="R$0.00"
+            />
           </View>
         </FormArea>
 
@@ -97,7 +139,11 @@ const Footer: React.FC = () => {
             <Title>Título</Title>
             <InputArea>
               <Icon name="edit-2" color="#363f5f" size={24} />
-              <Input placeholder="Adicione o título do lançamento" />
+              <Input
+                value={title}
+                onChangeText={text => setTitle(text)}
+                placeholder="Adicione o título do lançamento"
+              />
             </InputArea>
           </View>
         </FormArea>
@@ -107,24 +153,27 @@ const Footer: React.FC = () => {
             <Title>Categoria</Title>
             <InputArea>
               <Icon name="list" color="#363f5f" size={24} />
-              <Input placeholder="Outros" />
+              <Input
+                value={category}
+                onChangeText={text => setCategory(text)}
+                placeholder="Outros"
+              />
             </InputArea>
           </View>
         </FormArea>
 
-        <FormArea>
+        {/* <FormArea>
           <View>
             <Title>Data</Title>
             <InputArea>
               <Icon name="calendar" color="#363f5f" size={24} />
-              <Input placeholder="Hoje" />
+              <Input placeholder="Tipo" />
             </InputArea>
           </View>
-        </FormArea>
+       </FormArea> */}
       </Form>
-
       <ButtonArea direction="column">
-        <Button widthSize={370} color="#12A454">
+        <Button onPress={() => handleSubmit()} widthSize={370} color="#12A454">
           <ButtonText>Adicionar</ButtonText>
         </Button>
         <Button

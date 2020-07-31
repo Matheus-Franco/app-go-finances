@@ -12,10 +12,6 @@ interface IButtonArea {
   direction: string;
 }
 
-interface ITextInput {
-  fSize?: number;
-}
-
 export const Container = styled(Animated.View)`
   background: #fff;
   z-index: 300;
@@ -72,7 +68,7 @@ export const Icon = styled(Feather)`
   margin-right: 8px;
 `;
 
-export const Input = styled.TextInput<ITextInput>`
+export const Input = styled.TextInput`
   font-family: 'Poppins';
   font-size: 16px;
   color: #363f5f;
