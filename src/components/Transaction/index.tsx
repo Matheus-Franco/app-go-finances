@@ -75,14 +75,14 @@ const Transaction: React.FC = () => {
                   />
                 </ButtonIcon>
               ) : (
-                  <ButtonIcon onPress={toggleDetailed}>
-                    <Ionicons
-                      name="ios-arrow-down"
-                      size={24}
-                      style={{ color: '#363F5F' }}
-                    />
-                  </ButtonIcon>
-                )}
+                <ButtonIcon onPress={toggleDetailed}>
+                  <Ionicons
+                    name="ios-arrow-down"
+                    size={24}
+                    style={{ color: '#363F5F' }}
+                  />
+                </ButtonIcon>
+              )}
 
               <TransactionTitle>{transaction.title}</TransactionTitle>
             </View>
