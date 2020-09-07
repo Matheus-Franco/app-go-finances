@@ -7,7 +7,7 @@ import {
 } from '@expo-google-fonts/poppins';
 
 import Header from './src/components/Header';
-import Content from './src/components/Content';
+import Dashboard from './src/pages/Dashboard';
 
 const App: React.FC = () => {
   const [fontsLoaded] = useFonts({
@@ -20,9 +20,9 @@ const App: React.FC = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: '#F0F2F5' }}>
         <Header />
-        <Content />
+        <Dashboard />
       </View>
     </>
   );

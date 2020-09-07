@@ -14,7 +14,7 @@ interface IButtonArea {
 
 export const Container = styled(Animated.View)`
   background: #fff;
-  z-index: 300;
+  z-index: 6000;
   box-shadow: 0px -1px 12px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
@@ -44,7 +44,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const Form = styled.View`
-  height: 300px;
+  height: 340px;
   margin: 0 20px 100px;
 `;
 
@@ -53,11 +53,10 @@ export const InputArea = styled.View`
 `;
 
 export const FormArea = styled.View`
-  height: 90px;
+  height: 100px;
   width: 100%;
   flex-direction: row;
   align-items: center;
-
   background: transparent;
   border-bottom-width: 1px;
   border-color: #f0f2f5;
@@ -70,14 +69,14 @@ export const Icon = styled(Feather)`
 
 export const Input = styled.TextInput`
   font-family: 'Poppins';
-  font-size: 16px;
+  font-size: 20px;
   color: #363f5f;
   width: 90%;
 `;
 
 export const Title = styled.Text`
   font-family: 'Poppins';
-  font-size: 28px;
+  font-size: 24px;
   color: #363f5f;
   width: 50%;
 `;

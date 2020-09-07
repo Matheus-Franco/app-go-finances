@@ -7,7 +7,8 @@ interface ICardActive {
 export const Container = styled.TouchableOpacity<ICardActive>`
   background: ${(props): string => (props.active ? '#fe883b' : '#fff')};
   height: 138px;
-  transform: translateY(-62px);
+  width: 85%;
+  transform: translateY(40px);
   border-radius: 10px;
   padding: 24px 24px 14px 24px;
   justify-content: space-between;

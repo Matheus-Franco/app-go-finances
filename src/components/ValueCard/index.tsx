@@ -70,8 +70,8 @@ const ValueCard: React.FC = () => {
       {loading ? (
         <Loading />
       ) : (
-          <Price active={cardType === 0}>{balanceTypes[balanceType]}</Price>
-        )}
+        <Price active={cardType === 0}>{balanceTypes[balanceType]}</Price>
+      )}
     </Container>
   );
 };
