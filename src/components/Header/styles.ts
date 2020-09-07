@@ -5,6 +5,7 @@ export const Container = styled.SafeAreaView`
 
   align-items: center;
   height: 180px;
+  z-index: 1000;
 `;
 
 export const Logo = styled.Image`

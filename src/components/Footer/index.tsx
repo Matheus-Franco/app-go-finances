@@ -95,7 +95,7 @@ const Footer: React.FC = () => {
           {
             translateY: animation.interpolate({
               inputRange: [0, 1],
-              outputRange: [0, -200],
+              outputRange: [0, -100],
             }),
           },
         ],
@@ -142,7 +142,7 @@ const Footer: React.FC = () => {
               <Input
                 value={title}
                 onChangeText={text => setTitle(text)}
-                placeholder="Adicione o título do lançamento"
+                placeholder="Título do lançamento"
               />
             </InputArea>
           </View>
@@ -161,17 +161,8 @@ const Footer: React.FC = () => {
             </InputArea>
           </View>
         </FormArea>
-
-        {/* <FormArea>
-          <View>
-            <Title>Data</Title>
-            <InputArea>
-              <Icon name="calendar" color="#363f5f" size={24} />
-              <Input placeholder="Tipo" />
-            </InputArea>
-          </View>
-       </FormArea> */}
       </Form>
+
       <ButtonArea direction="column">
         <Button onPress={() => handleSubmit()} widthSize={370} color="#12A454">
           <ButtonText>Adicionar</ButtonText>
